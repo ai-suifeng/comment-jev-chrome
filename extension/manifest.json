@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "评论智析 · Jev",
+  "version": "0.1.0",
+  "description": "分析 B站 / 抖音 / 小红书 / YouTube 评论：恶意、水、灵感分类汇总",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://api.typesafe.ai/*"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "评论智析 · Jev"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/*",
+        "https://www.douyin.com/*",
+        "https://www.xiaohongshu.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

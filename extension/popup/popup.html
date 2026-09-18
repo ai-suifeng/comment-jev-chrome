@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>评论智析 <span class="sub">Jev</span></h1>
+      <button id="btn-settings" title="设置">⚙</button>
+    </header>
+
+    <section id="settings" class="hidden">
+      <label>
+        TypeSafe API key
+        <div class="row">
+          <input id="inp-key" type="password" placeholder="sk-..." />
+          <button id="btn-save-key">保存</button>
+        </div>
+      </label>
+      <div class="row two">
+        <label>
+          每批条数
+          <input id="inp-batch" type="number" min="5" max="25" />
+        </label>
+        <label>
+          最多分析
+          <input id="inp-max" type="number" min="10" max="500" step="10" />
+        </label>
+      </div>
+      <p class="hint">key 只保存在本机浏览器（chrome.storage.local），不会上传到别处。</p>
+    </section>
+
+    <section id="view-ready">
+      <div id="page-info" class="page-info">…</div>
+      <button id="btn-analyze" class="primary">分析本页评论</button>
+      <p class="hint">评论是懒加载的：先在页面上把评论区往下滚一滚，加载出多少就分析多少。</p>
+    </section>
+
+    <section id="view-running" class="hidden">
+      <div class="progress"><div id="progress-bar"></div></div>
+      <p id="progress-text" class="hint">准备中…</p>
+    </section>
+
+    <section id="view-error" class="hidden">
+      <p id="error-text" class="error"></p>
+      <div class="row">
+        <button id="btn-dump">复制结构诊断</button>
+        <button id="btn-retry" class="primary">重试</button>
+      </div>
+      <p class="hint">「复制结构诊断」会把第一条评论的页面结构复制到剪贴板，把它发给 AI 助手可以修复抓取。</p>
+    </section>
+
+    <section id="view-report" class="hidden">
+      <div id="report-meta" class="page-info"></div>
+      <div id="stat-chips" class="chips"></div>
+      <div id="tabs" class="tabs"></div>
+      <div id="comment-list" class="list"></div>
+      <footer>
+        <button id="btn-export">导出 JSON</button>
+        <button id="btn-again">重新分析</button>
+      </footer>
+    </section>
+
+    <script src="popup.js"></script>
+    <script src="ui.js"></script>
+  </body>
+</html>
